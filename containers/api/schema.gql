@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateRecipeInputType {
+  """The description of the recipe"""
+  description: String!
+
+  """The name of the recipe"""
+  name: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  """Create a new recipe"""
+  createRecipe(recipe: CreateRecipeInputType!): RecipeResponse!
+}
+
+type Query {
+  """Get all recipes"""
+  getRecipes: [RecipeObjectType!]!
+}
+
+type RecipeObjectType {
+  """When the recipe was created"""
+  createdAt: DateTime!
+
+  """The description of the recipe"""
+  description: String!
+
+  """The id of the recipe"""
+  id: String!
+
+  """The name of the recipe"""
+  name: String!
+
+  """When the recipe was updated"""
+  updatedAt: DateTime!
+}
+
+type RecipeResponse {
+  """The created recipe"""
+  recipe: RecipeObjectType!
+}

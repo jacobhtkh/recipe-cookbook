@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Recipe {
+  id          String       @id @default(cuid())
+  name        String
+  description String       @default("")
+  ingredients Ingredient[]
+  method      Method[]
+}
+
+model Method {
+  id          String  @id @default(cuid())
+  description String
+  Recipe      Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId    String?
+}
+
+enum Measurement {
+  grams
+  millilitre
+}
+
+model Ingredient {
+  id          String      @id @default(cuid())
+  name        String
+  amount      Float
+  measurement Measurement
+  Recipe      Recipe?     @relation(fields: [recipeId], references: [id])
+  recipeId    String?
+}
